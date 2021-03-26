@@ -1,10 +1,14 @@
 <template>
-<div>统计</div>
+<div>统计
+  <Nav></Nav>
+</div>
 </template>
 
 <script lang="ts">
+
  export  default {
-   name:'Statistics'
+   name:'Statistics',
+
  }
 </script>
 
