@@ -22,8 +22,8 @@ try {
 
 <style lang="scss" scoped>
   .icon {
-    width: 5em;
-    height: 5em;
+    width: 1em;
+    height: 1em;
     fill:currentColor;
     overflow: hidden;
   }
