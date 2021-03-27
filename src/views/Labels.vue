@@ -1,5 +1,8 @@
 <template>
-<div>标签
+<div>
+  <Layout>
+    <p>标签嗷</p>
+  </Layout>
   <Nav/>
 </div>
 </template>
