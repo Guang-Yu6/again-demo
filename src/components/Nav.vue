@@ -31,18 +31,17 @@
 <style lang="scss" scoped>
 @import "~@/assets/style/helper.scss";
   nav{
+    @extend %outerShadow;
     display: flex;
-    box-shadow: 0 0 3px pink;
+    flex-direction: row;
     font-size: 12px;
     > .item{
       padding: 2px 0;
       width: 33.333333%;
       display: flex;
       justify-content: center;
-      text-align-last: center;
       align-items: center;
       flex-direction: column;
-
         .icon{
           width: 32px;
           height: 32px;

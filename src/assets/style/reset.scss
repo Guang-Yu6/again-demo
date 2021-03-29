@@ -7,3 +7,13 @@ a{
   text-decoration: none;
   color:inherit
 }
+//  reset 重置清零
+ul,ol {
+  list-style:none
+}
+button, input {   // 字体继承
+  font: inherit;
+}
+:focus{  // 去掉边框线
+  outline: none;
+}
