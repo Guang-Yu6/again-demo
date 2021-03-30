@@ -7,31 +7,48 @@
 </div>
 </template>
 
-<script>
- export  default {
-   name: 'Types',
-   props: ['xxx'],
-   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-   data() {
-     return {
-       type: '-' // '-'表示支出，'+'表示收入
-     }
-   },
-   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-   mounted() {
-     console.log(this.xxx)
-   },
-   methods: {
-     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-     selectType(type) { // type 只能是 '-' 和 '+' 中的一个
-       if (type !== '-' && type !== '+') {
-         throw new Error('type is unknown')
-       }
-       this.type = type
-     }
-   }
+<script lang="ts">
+  import Vue from 'vue'
+  import {Component} from 'vue-property-decorator';
+  @Component  // 组件,告诉Vue type自动处理成data
 
- }
+  export default class Types extends Vue {
+    type = '-';  // data
+    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+    selectType(type:string) { // type 只能是 '-' 和 '+' 中的一个
+             if (type !== '-' && type !== '+') {
+               throw new Error('type is unknown')
+             }
+            this.type = type;
+           }
+
+  }
+
+
+ // export  default {
+ //   name: 'Types',
+ //   props: ['xxx'],
+ //   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+ //   data() {
+ //     return {
+ //       type: '-' // '-'表示支出，'+'表示收入
+ //     }
+ //   },
+ //   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+ //   mounted() {
+ //     console.log(this.xxx)
+ //   },
+ //   methods: {
+ //     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+ //     selectType(type) { // type 只能是 '-' 和 '+' 中的一个
+ //       if (type !== '-' && type !== '+') {
+ //         throw new Error('type is unknown')
+ //       }
+ //       this.type = type
+ //     }
+ //   }
+ //
+ // }
 
 </script>
 
