@@ -9,11 +9,18 @@
 
 <script lang="ts">
   import Vue from 'vue'
-  import {Component} from 'vue-property-decorator';
-  @Component  // 组件,告诉Vue type自动处理成data
+  import {Component,Prop} from 'vue-property-decorator';
 
+  @Component // 组件,告诉Vue type自动处理成data
   export default class Types extends Vue {
-    type = '-';  // data
+    type = '-';  // 这是data 。 '-'表示支出，’+‘表示收入
+
+    @Prop(Number) xxx: number | undefined;  // 装饰器
+    // Prop 告诉Vue · xxx 不是 data 是 prop
+    // Number  告诉 Vue xxx 运行时是个Number
+    // xxx属性名
+    // number| undefined 告诉 ts xxx 的编译时类型
+
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     selectType(type:string) { // type 只能是 '-' 和 '+' 中的一个
              if (type !== '-' && type !== '+') {
@@ -21,7 +28,13 @@
              }
             this.type = type;
            }
-
+           mounted() {
+             if (this.xxx === undefined){
+               console.log('没有xxx');
+             }else{
+               console.log(this.xxx.toString());
+             }
+           }
   }
 
 
