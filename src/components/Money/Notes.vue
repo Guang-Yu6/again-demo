@@ -1,6 +1,5 @@
 <template>
 <div>
-  {{value}}
   <label class="notes">
     <span class="name">备注</span>
     <input type="text"
@@ -32,7 +31,7 @@ import {Component} from 'vue-property-decorator';
 .notes {
   font-size: 14px;
   background: #f5f5f5;
-  padding:16px;
+  padding:8px;
   display: flex;
   align-items: center;
   .name{

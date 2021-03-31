@@ -1,7 +1,7 @@
 <template>
   <div class="tags">
     <div class="new">
-      <button>新增标签</button>
+      <button @click="create">新增标签</button>
     </div>
     <ul class="current">
       <li v-for="tag in dataSource" :key="tag"
@@ -18,7 +18,7 @@ import {Component,Prop} from 'vue-property-decorator';
 
   @Component
   export default class Tags extends Vue {
-    @Prop() dataSource:string[] | undefined;  // 告诉TS这是字符串数组
+    @Prop() readonly dataSource:string[] | undefined;  // 告诉TS这是字符串数组
     selectedTags: string[] = [];  // 选中后的
 
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
@@ -29,7 +29,16 @@ import {Component,Prop} from 'vue-property-decorator';
       }else{
         this.selectedTags.push(tag);
       }
-
+    }
+    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+    create(){
+      const name = window.prompt('请输入标签名')
+      if (name === ''){
+        window.alert('标签名不能为空');
+      }else if (this.dataSource) {  // 如果你填了一个name，这个name不为空
+          this.$emit('update:dataSource',  // 我就把你要更新DataSource的请求
+              [...this.dataSource, name]);  // 告诉给外面，外部就可以接收
+      }
     }
  }
 </script>
@@ -37,10 +46,10 @@ import {Component,Prop} from 'vue-property-decorator';
 <style lang="scss" scoped>
 @import "~@/assets/style/helper.scss";
 .tags {
-  border: 1px solid red;
-  flex-grow: 1;
   font-size: 14px;
   padding: 16px;
+  border: 1px solid red;
+  flex-grow: 1;
   display: flex;
   flex-direction: column-reverse;
   > .current{
