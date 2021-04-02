@@ -60,6 +60,7 @@
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     ok() {
       this.$emit('update:value',this.output);
+      this.$emit('submit',this.output)
     }
   }
 </script>
