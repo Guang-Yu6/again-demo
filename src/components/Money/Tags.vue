@@ -29,6 +29,7 @@ import {Component,Prop} from 'vue-property-decorator';
       }else{
         this.selectedTags.push(tag);
       }
+      this.$emit('update:value',this.selectedTags)
     }
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     create(){

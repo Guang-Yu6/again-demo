@@ -1,27 +1,33 @@
 <template>
 <div>
   <ul class="types">
-    <li :class="type === '-' && 'selected'" @click="selectType('-')">支出</li>
-    <li :class="type === '+' && 'selected'" @click="selectType('+')">收入</li>
+    <li :class="value === '-' && 'selected'" @click="selectType('-')">支出</li>
+    <li :class="value === '+' && 'selected'" @click="selectType('+')">收入</li>
   </ul>
 </div>
 </template>
 
 <script lang="ts">
   import Vue from 'vue'
-  import {Component} from 'vue-property-decorator';
+  import {Component,Prop} from 'vue-property-decorator';
   @Component // 组件,告诉Vue type自动处理成data
 
   export default class Types extends Vue {
-    type = '-';  // 这是data 。 '-'表示支出，’+‘表示收入
+    @Prop() readonly value!:string;  // 初始值
+    // type = '-';   // 这是data 。 '-'表示支出，’+‘表示收入  ①
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     selectType(type:string) { // type 只能是 '-' 和 '+' 中的一个
              if (type !== '-' && type !== '+') {
                throw new Error('type is unknown')
              }
-            this.type = type;
+             this.$emit('update:value',type)
+            // this.type = type;  ②
            }
-  }
+           // @Watch('type')  ③
+           //  onTypeChanged(value:string){
+           //   this.$emit('update:value',value);
+           //  }
+    }
 </script>
 
 <style lang="scss" scoped>

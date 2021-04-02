@@ -59,7 +59,7 @@
     }
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     ok() {
-      this.output = '0';
+      this.$emit('update:value',this.output);
     }
   }
 </script>
