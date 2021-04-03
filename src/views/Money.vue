@@ -1,6 +1,6 @@
 <template>
   <Layout class-prefix="layout">
-    {{record}}
+
     <NumberPad :value="record.amount" @submit="saveRecord" @update:value="onUpdateAmount"/>
     <Types :value.sync="record.type"/>
     <Notes @update:value="onUpdateNotes"/>
@@ -15,6 +15,8 @@
   import Notes from '@/components/Money/Notes.vue';
   import Tags from '@/components/Money/Tags.vue';
   import {Component,Watch} from 'vue-property-decorator';
+  import model from '@/model';
+
 
   // var record = {
   //   tags: ['1','2']
@@ -23,11 +25,15 @@
   //   amount:100
   // };
 
-  type Record = {   // 类型声明
+
+  const recordList = model.fetch()
+
+  type RecordItem = {   // 类型声明
     tags:string[],
     notes:string,
     type:string,
-    amount:number
+    amount:number,    // 数据类型 object | string
+    createdAt?: Date  // 类 构造函数
   }
 
   @Component({
@@ -35,8 +41,8 @@
   })
   export default class Money extends Vue{
     tags = ['衣','食','住','行','彩票'];
-    recordList: Record[] = [];
-    record:Record = {
+    recordList: RecordItem[] = JSON.parse(window.localStorage.getItem('recordList')||'[]')
+    record:RecordItem = {
       tags:[],
       notes:'',
       type:'-',
@@ -66,15 +72,15 @@
 
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     saveRecord(){  // 深拷贝
-      const record2 = JSON.parse(JSON.stringify(this.record))
-      this.recordList.push(record2);
-      console.log(this.recordList);
+      const record2: RecordItem = model.clone(this.record);
+      record2.createdAt = new Date()
+      this.recordList.push(record2);  // 更新数据
     }
 
     @Watch('recordList')
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-    onRecordListChange(){
-      window.localStorage.setItem('recordList', JSON.stringify(this.recordList));
+    onRecordListChange(){  // 保存数据
+      model.save(this.recordList);
     }
   }
 </script>
