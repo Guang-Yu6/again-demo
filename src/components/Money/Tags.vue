@@ -48,6 +48,7 @@ import {Component,Prop} from 'vue-property-decorator';
 <style lang="scss" scoped>
 @import "~@/assets/style/helper.scss";
 .tags {
+  background: white;
   font-size: 14px;
   padding: 16px;
   border: 1px solid red;
