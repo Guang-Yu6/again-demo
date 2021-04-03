@@ -1,8 +1,8 @@
 <template>
   <Layout>
     <ol class="tags">
-      <li v-for="tag in tags" :key="tag">
-        <span>{{tag}}</span>
+      <li v-for="tag in tags" :key="tag.id">
+        <span>{{tag.name}}</span>
         <Icon name="right"/>
       </li>
     </ol>
@@ -23,6 +23,7 @@ tagListModel.fetch();
 @Component
 export default class Labels extends  Vue {
   tags = tagListModel.data;
+
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   creatTag(){
     const name = window.prompt('请输出标签名')

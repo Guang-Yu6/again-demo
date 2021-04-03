@@ -31,6 +31,7 @@ import {Component,Prop} from 'vue-property-decorator';
       }
       this.$emit('update:value',this.selectedTags)
     }
+
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     create(){
       const name = window.prompt('请输入标签名')
