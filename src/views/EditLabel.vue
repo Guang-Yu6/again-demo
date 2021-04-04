@@ -52,7 +52,11 @@ export default class EditLabel extends Vue {
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     remove(){
       if (this.tag){
-        tagListModel.remove(this.tag.id)
+        if (tagListModel.remove(this.tag.id)){  // 如果返回的是true
+          this.$router.back();
+        }else {
+          window.alert('删除失败')
+        }
       }
     }
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
