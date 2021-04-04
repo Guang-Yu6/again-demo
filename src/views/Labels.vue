@@ -9,10 +9,11 @@
       </router-link>
     </div>
     <div class="createTag-wrapper">
-        <Button class="createTag" @click="creatTag">新建标签</Button>
+        <Button class="createTag"
+                @click="creatTag">新建标签
+        </Button>
     </div>
   </Layout>
-
 </template>
 
 <script lang="ts">
@@ -63,8 +64,8 @@ export default class Labels extends  Vue {
     }
   }
   .createTag {
-    background: #767676;
-    color: sandybrown;
+    background: steelblue;
+    color: white;
     border-radius:4px;
     border:none;
     height: 40px;

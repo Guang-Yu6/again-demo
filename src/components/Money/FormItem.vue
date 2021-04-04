@@ -4,7 +4,7 @@
     <span class="name">{{this.fieldName}}</span>
     <input type="text"
            v-model="value"
-           :placeholder="this.placeholder">
+           :placeholder="placeholder">
   </label>
 </div>
 <!--  :value="value"-->
@@ -14,7 +14,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {Component,Watch,Prop} from 'vue-property-decorator';
+import {Component,Prop} from 'vue-property-decorator';
 
 @Component
   export default class FormItem extends Vue {
@@ -23,7 +23,7 @@ import {Component,Watch,Prop} from 'vue-property-decorator';
     @Prop({required:true}) fieldName!:string;
     @Prop() placeholder?: string
 
-    @Watch('value')
+
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   onValueChanged(value:string){
       this.$emit('update:value',value)
@@ -39,7 +39,6 @@ import {Component,Watch,Prop} from 'vue-property-decorator';
 @import "~@/assets/style/helper.scss";
 .formItem {
   font-size: 14px;
-
   padding:8px;
   display: flex;
   align-items: center;

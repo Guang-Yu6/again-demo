@@ -48,10 +48,10 @@ import {Component,Prop} from 'vue-property-decorator';
 <style lang="scss" scoped>
 @import "~@/assets/style/helper.scss";
 .tags {
-  background: white;
+  background: wheat;
   font-size: 14px;
   padding: 16px;
-  border: 1px solid red;
+  // border: 1px solid red;
   flex-grow: 1;
   display: flex;
   flex-direction: column-reverse;
