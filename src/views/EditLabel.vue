@@ -2,17 +2,19 @@
 <Layout>
 
   <div class="navBar">
-    <Icon class="leftIcon" name="left"/>
+    <Icon class="leftIcon" name="left" @click="goBack"/>
     <span class="title">编辑标签吧</span>
     <span class="rightIcon"></span>
   </div>
 
   <div class="form-wrapper">
-    <FormItem  :value="tag.name" field-name="标签名" placeholder="请输入标签名"/>
+    <FormItem  :value="tag.name"
+               @update:value="update"
+               field-name="标签名" placeholder="请输入标签名"/>
   </div>
 
   <div class="button-wrapper">
-    <Button class="buttons">删除标签</Button>
+    <Button @click="remove" class="buttons">删除标签</Button>
   </div>
 
 </Layout>
@@ -40,6 +42,22 @@ export default class EditLabel extends Vue {
       }else {
         this.$router.replace('/404')
       }
+    }
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+    update(name:string){
+      if (this.tag){
+        tagListModel.update(this.tag.id,name)
+      }
+    }
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+    remove(){
+      if (this.tag){
+        tagListModel.remove(this.tag.id)
+      }
+    }
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+    goBack(){
+      this.$router.back();
     }
 }
 </script>
