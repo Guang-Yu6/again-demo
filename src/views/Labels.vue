@@ -50,7 +50,7 @@ export default class Labels extends  Vue {
     font-size: 16px;
     padding-left: 16px;
     > .tag {
-        min-height: 44px;
+      min-height: 44px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -64,8 +64,8 @@ export default class Labels extends  Vue {
     }
   }
   .createTag {
-    background: steelblue;
-    color: white;
+    background: bisque;
+    color: saddlebrown;
     border-radius:4px;
     border:none;
     height: 40px;
