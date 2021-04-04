@@ -8,7 +8,7 @@
   </div>
 
   <div class="form-wrapper">
-    <FormItem field-name="标签名" placeholder="请输入标签名"/>
+    <FormItem  :value="tag.name" field-name="标签名" placeholder="请输入标签名"/>
   </div>
 
   <div class="button-wrapper">
@@ -28,6 +28,7 @@ import FormItem from '@/components/Money/FormItem.vue';
   components:{FormItem}
 })
 export default class EditLabel extends Vue {
+  tag?: {id:string, name:string} = undefined;  // ?的意思是默认可以为空
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     created(){
       const id = this.$route.params.id
@@ -35,7 +36,7 @@ export default class EditLabel extends Vue {
       const tags = tagListModel.data
       const tag = tags.filter(t => t.id === id)[0]
       if (tag){
-        console.log(tag);
+        this.tag = tag
       }else {
         this.$router.replace('/404')
       }
