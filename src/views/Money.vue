@@ -80,15 +80,13 @@
 
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     saveRecord(){  // 深拷贝
-      const record2: RecordItem = recordListModel.clone(this.record);
-      record2.createdAt = new Date()
-      this.recordList.push(record2);  // 更新数据
+      recordListModel.create(this.record);
     }
 
     @Watch('recordList')
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     onRecordListChange(){  // 保存数据
-      recordListModel.save(this.recordList);
+      recordListModel.save();
     }
   }
 </script>
