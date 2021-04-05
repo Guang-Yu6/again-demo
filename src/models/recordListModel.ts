@@ -1,13 +1,17 @@
 const localStorageKeyName = 'recordList';
 const recordListModel = {
+    data:[] as RecordItem[],
     clone(data:RecordItem[] | RecordItem){
         return JSON.parse(JSON.stringify(data)) ;
     },
     fetch(){  //拿到
-        return JSON.parse(window.localStorage.getItem('recordList')||'[]') as RecordItem[];
+
+        this.data = JSON.parse(window.localStorage.getItem('recordList')||'[]') as RecordItem[];
+        return this.data;
     },
-    save(data:RecordItem[]){  //保存
-        window.localStorage.setItem(localStorageKeyName, JSON.stringify(data));
+    save(){  //保存
+        window.localStorage.setItem(localStorageKeyName,
+          JSON.stringify(this.data));
     }
 };
 
