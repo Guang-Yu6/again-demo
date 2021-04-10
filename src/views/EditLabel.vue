@@ -6,7 +6,7 @@
       <span class="rightIcon"></span>
     </div>
     <div class="form-wrapper">
-      <FormItem :value="tag.name"
+      <FormItem :value="currentTag.name"
                 @update:value="update"
                 field-name="标签名" placeholder="请输入标签名"/>
     </div>
@@ -21,7 +21,7 @@ import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import FormItem from '@/components/Money/FormItem.vue';
 import Button from '@/components/Button.vue';
-import store from '@/store/index2';
+
 
 
 type Tag = {
@@ -30,37 +30,38 @@ type Tag = {
 }
 
 @Component({
-  components: {Button, FormItem}
+  components: {Button, FormItem},
 })
 export default class EditLabel extends Vue {
-  tag?: Tag = undefined;
+  get currentTag() {
+    return this.$store.state.currentTag;
+  }
 
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+
   created() {
-    this.tag = store.findTag(this.$route.params.id);
-    if (!this.tag) {
+    const id = this.$route.params.id;
+    this.$store.commit('fetchTags');
+    this.$store.commit('setCurrentTag', id);
+    if (!this.currentTag) {
       this.$router.replace('/404');
     }
   }
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  update(name: string) {
-    if (this.tag) {
 
-      store.updateTag(this.tag.id, name);
+  update(name: string) {
+    if (this.currentTag) {
+      this.$store.commit('updateTag', {
+        id: this.currentTag.id, name
+      });
     }
   }
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  remove() {
-    if (this.tag) {
 
-        if (store.removeTag(this.tag.id)) {
-          this.$router.back();
-        } else {
-          window.alert('删除失败');
-        }
+
+  remove() {
+    if (this.currentTag) {
+      this.$store.commit('removeTag', this.currentTag.id);
       }
     }
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+
     goBack() {
       this.$router.back();
     }
