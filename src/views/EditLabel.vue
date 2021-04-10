@@ -23,36 +23,32 @@
 <script lang="ts">
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
-import tagListModel from '@/models/tagListModel';
+
 import FormItem from '@/components/Money/FormItem.vue';
 
 @Component({
   components:{FormItem}
 })
 export default class EditLabel extends Vue {
-  tag?: {id:string, name:string} = undefined;  // ?的意思是默认可以为空
+  // eslint-disable-next-line no-undef
+  tag?: Tag = undefined;  // ?的意思是默认可以为空
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     created(){
-      const id = this.$route.params.id
-      tagListModel.fetch();
-      const tags = tagListModel.data
-      const tag = tags.filter(t => t.id === id)[0]
-      if (tag){
-        this.tag = tag
-      }else {
+      this.tag = window.findTag(this.$route.params.id);
+      if (!this.tag) {
         this.$router.replace('/404')
       }
     }
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     update(name:string){
       if (this.tag){
-        tagListModel.update(this.tag.id,name)
+        window.updateTag(this.tag.id, name);
       }
     }
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     remove(){
       if (this.tag){
-        if (tagListModel.remove(this.tag.id)){  // 如果返回的是true
+        if (window.removeTag(this.tag.id)) {  // 如果返回的是true
           this.$router.back();
         }else {
           window.alert('删除失败')
