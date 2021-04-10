@@ -4,7 +4,7 @@
       <button @click="create">新增标签</button>
     </div>
     <ul class="current">
-      <li v-for="tag in dataSource" :key="tag.id"
+      <li v-for="tag in tagList" :key="tag.id"
           :class="{selected: selectedTags.indexOf(tag)>=0}"
           @click="toggle(tag)">{{tag.name}}
       </li>
@@ -14,11 +14,12 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {Component,Prop} from 'vue-property-decorator';
+import {Component} from 'vue-property-decorator';
+import store from '@/store/index2';
 
   @Component
   export default class Tags extends Vue {
-    @Prop({required:true}) readonly dataSource!:string[];  // 告诉TS这是字符串数组
+    tagList = store.fetchTags();
     selectedTags: string[] = [];  // 选中后的
 
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
@@ -35,14 +36,9 @@ import {Component,Prop} from 'vue-property-decorator';
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     create(){
       const name = window.prompt('请输入标签名')
-      if (name === ''){
-        window.alert('标签名不能为空');
-      }else if (this.dataSource) {  // 如果你填了一个name，这个name不为空
-            this.$emit('add',name)
-          // this.$emit('update:dataSource',  // 我就把你要更新DataSource的请求
-          //     [...this.dataSource, name]);  // 告诉给外面，外部就可以接收
+      if (!name) { return window.alert('标签名不能为空'); }
+      store.createTag(name);
       }
-    }
  }
 </script>
 
