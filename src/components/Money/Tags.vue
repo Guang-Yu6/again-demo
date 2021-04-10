@@ -18,7 +18,7 @@ import {Component,Prop} from 'vue-property-decorator';
 
   @Component
   export default class Tags extends Vue {
-    @Prop() readonly dataSource:string[] | undefined;  // 告诉TS这是字符串数组
+    @Prop({required:true}) readonly dataSource!:string[];  // 告诉TS这是字符串数组
     selectedTags: string[] = [];  // 选中后的
 
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
@@ -38,8 +38,9 @@ import {Component,Prop} from 'vue-property-decorator';
       if (name === ''){
         window.alert('标签名不能为空');
       }else if (this.dataSource) {  // 如果你填了一个name，这个name不为空
-          this.$emit('update:dataSource',  // 我就把你要更新DataSource的请求
-              [...this.dataSource, name]);  // 告诉给外面，外部就可以接收
+            this.$emit('add',name)
+          // this.$emit('update:dataSource',  // 我就把你要更新DataSource的请求
+          //     [...this.dataSource, name]);  // 告诉给外面，外部就可以接收
       }
     }
  }

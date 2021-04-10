@@ -48,7 +48,7 @@
     components: {Tags,FormItem, Types, NumberPad}
   })
   export default class Money extends Vue{
-    tags = tagList;               // ['衣','食','住','行','彩票'];
+    tags = window.tagList;             // ['衣','食','住','行','彩票'];
     recordList: RecordItem[] = JSON.parse(window.localStorage.getItem('recordList')||'[]')
     record:RecordItem = {
       tags:[],
