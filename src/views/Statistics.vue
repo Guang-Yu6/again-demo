@@ -20,6 +20,9 @@
     }
   }
 }
+::v-deep .interval-tabs-item {  // 年月日高度
+  height: 48px;
+}
 </style>
 
 <script lang="ts">
