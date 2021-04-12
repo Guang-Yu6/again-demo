@@ -10,10 +10,11 @@
       </li>
     </ul>
   </div>
+
 </template>
 
 <script lang="ts">
-// import Vue from 'vue';
+
 import {Component} from 'vue-property-decorator';
 import {mixins} from 'vue-class-component';
 import TagHelper from '@/mixins/TagHelper';
@@ -41,21 +42,19 @@ export default class Tags extends mixins(TagHelper) {
 </script>
 
 <style lang="scss" scoped>
-@import "~@/assets/style/helper.scss";
 .tags {
-  background: wheat;
+  background: white;
   font-size: 14px;
   padding: 16px;
-  // border: 1px solid red;
   flex-grow: 1;
   display: flex;
   flex-direction: column-reverse;
-  > .current{
+  > .current {
     display: flex;
-    flex-wrap:wrap ;
-    > li{
-      $bg:#d9d9d9;
-      background: #d9d9d9;
+    flex-wrap: wrap;
+    > li {
+      $bg: #D9D9D9;
+      background: $bg;
       $h: 24px;
       height: $h;
       line-height: $h;
@@ -63,15 +62,15 @@ export default class Tags extends mixins(TagHelper) {
       padding: 0 16px;
       margin-right: 12px;
       margin-top: 4px;
-      &.selected{
-        background: darken($bg,50%);
+      &.selected {
+        background: darken($bg, 50%);
         color: white;
       }
     }
   }
   > .new {
     padding-top: 16px;
-    button{
+    button {
       background: transparent;
       border: none;
       color: #999;

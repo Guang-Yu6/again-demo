@@ -17,3 +17,6 @@ button, input {   // 字体继承
 :focus{  // 去掉边框线
   outline: none;
 }
+h1,h2,h3,h4,h5,h6{
+  font-weight: normal;
+}
