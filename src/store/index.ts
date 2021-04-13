@@ -50,11 +50,12 @@ const store = new Vuex.Store({
     fetchRecords(state) {
       state.recordList = JSON.parse(window.localStorage.getItem('recordList') || '[]') as RecordItem[];
     },
-    createRecord(state, record) {
+    createRecord(state, record:RecordItem) {
       const record2: RecordItem = clone(record);
       record2.createdAt = new Date().toISOString();
       state.recordList.push(record2);
       store.commit('saveRecords');
+
     },
     saveRecords(state) {
       window.localStorage.setItem('recordList',
@@ -62,6 +63,7 @@ const store = new Vuex.Store({
     },
     fetchTags(state) {
       state.tagList = JSON.parse(window.localStorage.getItem('tagList') || '[]');
+
     },
     createTag(state, name: string) {
       const names = state.tagList.map(item => item.name);
@@ -70,6 +72,7 @@ const store = new Vuex.Store({
       }
       const id = createId().toString();
       state.tagList.push({id, name: name});
+      state.recordList
       store.commit('saveTags');
       window.alert('添加成功');
     },

@@ -6,10 +6,12 @@
     <div class="notes">
       <FormItem field-name="备注"
                 placeholder="在这里输入备注"
+                :value="record.notes"
                 @update:value="onUpdateNotes"
+
       />
     </div>
-    <Tags/>
+    <Tags @update:value="record.tags = $event"/>
     {{record}}
   </Layout>
 </template>
@@ -22,44 +24,31 @@ import Tags from '@/components/Money/Tags.vue';
 import {Component} from 'vue-property-decorator';
 import Tabs from '@/components/Tabs.vue';
 import recordTypeList from '@/constants/recordTypeList';
-
-
-type RecordItem = {
-  tags: string[]
-  notes: string
-  type: string
-  amount: number // 数据类型 object | string
-  createdAt?: Date  // 类 / 构造函数
-}
-
-
 @Component({
-  components: {Tabs,Tags, FormItem, NumberPad}
+  components: {Tabs, Tags, FormItem, NumberPad},
 })
 export default class Money extends Vue {
   get recordList() {
     return this.$store.state.recordList;
   }
-
   recordTypeList = recordTypeList;
-
   record: RecordItem = {
     tags: [], notes: '', type: '-', amount: 0
   };
-
   created() {
     this.$store.commit('fetchRecords');
   }
-
   onUpdateNotes(value: string) {
     this.record.notes = value;
   }
-
   saveRecord() {
+
     this.$store.commit('createRecord', this.record);
+    this.record.notes = ''
   }
 }
 </script>
+
 <style lang="scss" scoped>
 ::v-deep .layout-content {
   display: flex;
@@ -69,3 +58,4 @@ export default class Money extends Vue {
   padding: 12px 0;
 }
 </style>
+
