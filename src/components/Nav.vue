@@ -6,7 +6,7 @@
     </router-link>
 
     <router-link to="labels" class="item" active-class="selected">
-      <Icon name="label" />
+      <Icon name="add1" />
       标签
     </router-link>
 
@@ -19,8 +19,6 @@
 </template>
 
 <script lang="ts">
-
-
   import Icon from '@/components/Icon.vue';
   export default {
     name: 'Nav',

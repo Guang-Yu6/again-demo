@@ -12,7 +12,7 @@
       />
     </div>
     <Tags @update:value="record.tags = $event"/>
-    {{record}}
+<!--    {{record}}-->
   </Layout>
 </template>
 
